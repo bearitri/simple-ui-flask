@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Logs</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+  </head>
+  <body>
+    <div class="dashboard-shell">
+      <nav class="topbar">
+        <div>
+          <h2>Simple UI Flask</h2>
+          <p>Recent activity</p>
+        </div>
+        <div class="nav-links">
+          <a href="{{ url_for('home') }}">Home</a>
+          <a class="active" href="{{ url_for('logs') }}">Logs</a>
+          <a href="{{ url_for('logout') }}">Logout</a>
+        </div>
+      </nav>
+
+      <main class="dashboard-content">
+        <section class="table-card">
+          <h1>System logs</h1>
+          <table>
+            <thead>
+              <tr>
+                <th>Time</th>
+                <th>Level</th>
+                <th>Message</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for entry in entries %}
+              <tr>
+                <td>{{ entry.time }}</td>
+                <td><span class="level {{ entry.level.lower() }}">{{ entry.level }}</span></td>
+                <td>{{ entry.message }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>
